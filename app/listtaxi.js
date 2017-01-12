@@ -7,8 +7,6 @@ import {
   Button, SearchBar,
 } from 'react-native-elements';
 
-
-
 var REQUEST_URL="https://api.myjson.com/bins/w2odf";
 
 export default class ListTaxi extends Component {

@@ -15,8 +15,7 @@ import {
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {te:" "};
-    this.state = {line:" "}
+    this.state = {te:" ",line:" ",error: " "};
     }
 
 
@@ -26,6 +25,7 @@ export default class Home extends Component {
         data.push(i);
     }
     Picker.init({
+        pickerTitleText: "Bsf.",
         pickerData: data,
         selectedValue: [4000],
         onPickerConfirm: data => {
@@ -37,6 +37,7 @@ export default class Home extends Component {
   _showLines(){
     items = ['Taxi Unimet','Taxi UCAB'];
     Picker.init({
+        pickerTitleText: "Linea de Taxi",
         pickerData: items,
         selectedValue: ['Taxi Unimet'],
         onPickerConfirm: items => {
@@ -44,6 +45,13 @@ export default class Home extends Component {
         }
     });
     Picker.show();
+  }
+  _validate(){
+    if (this.state.te != " " && this.state.line != " "){
+       Actions.list({pay:this.state.te, line:this.state.line, title: this.state.line});
+    }
+    this.setState({error:'Seleccione todos los campos.'});
+
   }
   render(){
     var MyText = function(t) {
@@ -53,6 +61,15 @@ export default class Home extends Component {
          </Text>
        )
      }
+     var MyError = function(t) {
+       console.log(t);
+
+        return(
+          <Text style={{color:'red'}}>
+            {t}
+          </Text>
+        )
+      }
 
     return(
       <View>
@@ -75,13 +92,13 @@ export default class Home extends Component {
         <Button
           buttonStyle={{marginTop: 80, marginLeft: 20 }}
           large
-          onPress={() => Actions.list({pay:this.state.te, line:this.state.line, title: this.state.line})}
+          onPress={this._validate.bind(this) }
           iconRight
           icon={{name: 'code', color: 'black'}}
           backgroundColor= 'yellow'
           color = 'black'
           title='Siguiente' />
-
+          {MyError(this.state.error)}
       </View>
     );
   }
