@@ -6,7 +6,6 @@ import { Actions } from 'react-native-router-flux';
 import {
   Button, SearchBar,Icon,
 } from 'react-native-elements';
-import jnames from './names.json'
 
 var REQUEST_URL="http://12x3taxi.com.ve/taxi/public/mobile/";
 var POST_URL = 'http://app.tzone.run/mercadopago/pay.php';
